@@ -1,6 +1,6 @@
 <?php
 
-namespace JanDrabek\Tracy;
+namespace Vipkwd\Tracy;
 
 use Tracy\IBarPanel;
 
