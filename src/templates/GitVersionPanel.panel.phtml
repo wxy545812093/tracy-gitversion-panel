@@ -5,9 +5,8 @@ namespace JanDrabek\Tracy;
 ?>
 
 <style class="tracy-debug">
-
 	#tracy-debug .nette-ContainerPanel .tracy-inner {
-		width: 700px;
+		width: 100%;
 	}
 
 	#tracy-debug .nette-ContainerPanel table {
@@ -15,36 +14,74 @@ namespace JanDrabek\Tracy;
 		white-space: nowrap;
 	}
 
+	#tracy-debug tr th {
+		width: 220px
+	}
 </style>
 
 <div class="nette-ContainerPanel">
 	<h1>Git Version</h1>
+	<?php $confs = $this->config(true);
+	if (empty($confs)) { ?>
+		<p>This project looks unversioned. You may want to run the command of below in root directory of the project.
+			<pre style="background: #000;color: #fff;margin-bottom: 5px;padding:3px">git init</pre>
+		</p>
+	<?php } else { ?>
 
-	<h2>Actual state</h2>
-	<table>
-		<tr>
-			<th>Revision</th>
-			<td><?php echo $this->getCurrentCommitHash(); ?></td>
-		</tr>
-	</table>
-
-	<h2>Last logs</h2>
-	<div class="tracy-inner">
+		<h2> -- Actual state</h2>
 		<table>
 			<tr>
-				<th>From</th>
-				<th>To</th>
-				<th>User &amp; time</th>
-				<th>Action</th>
+				<th>Revision</th>
+				<td><?php echo $this->getCurrentCommitHash(); ?></td>
 			</tr>
-			<?php foreach ($this->getLogTail() as $row) { ?>
+			<tr>
+				<th>Branches</th>
+				<td><?php echo $this->getCurrentBranchName(); ?></td>
+			</tr>
+			<tr>
+				<th>Remotes</th>
+				<td><?php echo $this->getRemotes(); ?></td>
+			</tr>
+			<tr>
+				<th>Tags</th>
+				<td><?php echo $this->getTags(); ?></td>
+			</tr>
+			<tr>
+				<th>Last commit</th>
+				<td><?php echo $this->getLastCommitMessage(); ?></td>
+			</tr>
+		</table>
+
+
+		<h2> -- Git conf state</h2>
+		<table>
+			<?php foreach ($confs as $conf) { ?>
 				<tr>
-					<td><?php echo $row['from']; ?></td>
-					<td><?php echo $row['to']; ?></td>
-					<td><?php echo $row['user']; ?></td>
-					<td><?php echo $row['action']; ?></td>
+					<th><?php echo $conf['key']; ?></th>
+					<td><?php echo $conf['val']; ?></td>
 				</tr>
 			<?php } ?>
 		</table>
-	</div>
+
+
+		<h2> -- Last logs</h2>
+		<div class="tracy-inner">
+			<table>
+				<tr>
+					<th>From</th>
+					<th>To</th>
+					<th>User &amp; time</th>
+					<th>Action</th>
+				</tr>
+				<?php foreach ($this->getLogTail() as $row) { ?>
+					<tr>
+						<td><?php echo $row['from']; ?></td>
+						<td><?php echo $row['to']; ?></td>
+						<td><?php echo $row['user']; ?></td>
+						<td><?php echo $row['action']; ?></td>
+					</tr>
+				<?php } ?>
+			</table>
+		</div>
+	<?php } ?>
 </div>

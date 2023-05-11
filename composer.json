@@ -1,27 +1,20 @@
 {
-	"name": "jandrabek/tracy-gitversion-panel",
+	"name": "vipkwd/tracy-gitversion-panel",
 	"description": "Tracy DebugBar panel displaying current project git branch.",
-	"keywords": ["nette", "debug", "git", "branch", "log"],
+	"keywords": ["nette", "debug", "git", "branch", "log","vipkwd"],
 	"license": ["BSD-3-Clause"],
-	"authors": [
-		{
-			"name": "Vojtěch Vondra",
-			"homepage": "http://www.vojtechvondra.cz"
-		},
-		{
-			"name": "Jan Drábek",
-			"homepage": "http://www.jandrabek.cz"
-		},
-		{
-			"name": "Štěpán Škorpil",
-			"homepage": "http://www.skorpils.cz"
-		}
-	],
+    "homepage": "https://www.vipkwd.com",
+    "authors": [
+        {
+            "name": "Vipkwd",
+            "email": "service@vipkwd.com"
+        }
+    ],
 	"require": {
-		"php": ">= 5.3.2",
+		"php": ">=7.0",
 		"tracy/tracy": "~2.2"
 	},
 	"autoload": {
-		"psr-4": { "JanDrabek\\Tracy\\": "src/" }
+		"psr-4": { "Vipkwd\\Tracy\\": "src/" }
 	}
 }
