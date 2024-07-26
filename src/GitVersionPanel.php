@@ -204,6 +204,9 @@ class GitVersionPanel implements IBarPanel
 
 		$scriptPath = $_SERVER['SCRIPT_FILENAME'];
 		$dir = realpath(dirname($scriptPath));
+		if(substr($dir, -6) == 'public'){
+			$dir = dirname($dir);
+		}
 		while ($dir !== false) {
 			flush();
 			$currentDir = $dir;
@@ -219,7 +222,7 @@ class GitVersionPanel implements IBarPanel
 				break;
 			}
 		}
-		return NULL;
+		return '';
 	}
 
 	private function parseHead()
